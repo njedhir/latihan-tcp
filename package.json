@@ -1,0 +1,24 @@
+{
+  "name": "latihan-tcp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/njedhir/latihan-tcp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/njedhir/latihan-tcp/issues"
+  },
+  "homepage": "https://github.com/njedhir/latihan-tcp#readme",
+  "dependencies": {
+    "json-socket": "^0.3.0"
+  }
+}
