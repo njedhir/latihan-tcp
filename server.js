@@ -12,8 +12,13 @@ const server = net.createServer(socket => {
     console.log(err.message)
   })
   sock.on('message', msg => {
-    const nama = msg.nama
-    console.log(`Client dengan nama ${nama} terkoneksi ke Server`)
+    if (msg.type == 'Message Biasa') {
+      console.log('Pesan dari client:')
+      console.log(msg.pesan)
+    } else if (msg.type == 'Perkenalan') {
+      const nama = msg.dataUser.nama
+      console.log(`Client dengan nama ${nama} terkoneksi ke Server`)
+    }
   })
 })
 server.on('listening', () => {

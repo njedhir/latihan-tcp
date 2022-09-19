@@ -1,3 +1,4 @@
+const readline = require('readline')
 const net = require('net')
 const JsonSocket = require('json-socket')
 
@@ -24,7 +25,12 @@ const dataUser = {
 client.on('connect', () => {
   console.log('Connected to server')
   // kirim()
-  client.sendMessage(dataUser)
+  const msg = {
+    type: 'Perkenalan',
+    dataUser
+  }
+  client.sendMessage(msg)
+  askInput()
 })
 
 client.on('data', data => {
@@ -43,3 +49,20 @@ function kirim() {
 }
 
 client.connect(40000, 'localhost')
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+})
+
+function askInput() {
+  rl.question('Send Message:', input => {
+    if (input == 'exit') return rl.close()
+    const msg = {
+      type: 'Message Biasa',
+      pesan: input
+    }
+    client.sendMessage(msg)
+    askInput()
+  })
+}
