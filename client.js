@@ -33,8 +33,18 @@ client.on('connect', () => {
   askInput()
 })
 
-client.on('data', data => {
-  console.log(data.toString())
+// client.on('data', data => {
+//   console.log(data.toString())
+// })
+
+client.on('message', msg => {
+  if (msg.type == 'Message Biasa') {
+    console.log('Pesan baru diterima:')
+    console.log(msg.pesan)
+  } else if (msg.type == 'private') {
+    console.log(`Private message dari ${msg.from}:`)
+    console.log(msg.pesan)
+  }
 })
 
 client.on('error', err => {
@@ -42,11 +52,11 @@ client.on('error', err => {
   console.log(err.message)
 })
 
-function kirim() {
-  setInterval(() => {
-  client.write(`Hallo server (dari client ${x})`)
-  }, 2000)
-}
+// function kirim() {
+//   setInterval(() => {
+//   client.write(`Hallo server (dari client ${x})`)
+//   }, 2000)
+// }
 
 client.connect(40000, 'localhost')
 
@@ -58,11 +68,23 @@ const rl = readline.createInterface({
 function askInput() {
   rl.question('Send Message:', input => {
     if (input == 'exit') return rl.close()
-    const msg = {
-      type: 'Message Biasa',
-      pesan: input
+    
+    const sendTyp = input.split('>')
+    if (sendTyp[0] == 'private') {
+      const msg = {
+        type: 'private',
+        from: nama,
+        to: sendTyp[1],
+        pesan: sendTyp[2]
+      }
+      client.sendMessage(msg)
+    } else {
+      const msg = {
+        type: 'Message Biasa',
+        pesan: input
+      }
+      client.sendMessage(msg)
     }
-    client.sendMessage(msg)
     askInput()
   })
 }

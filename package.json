@@ -4,8 +4,10 @@
   "description": "",
   "main": "client.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "startServer": "nodemon server.js",
+    "startAres": "nodemon client.js Ares",
+    "startRobbi": "nodemon client.js Robbi",
+    "startWahyu": "nodemon client.js Wahyu"
   },
   "repository": {
     "type": "git",
@@ -20,5 +22,8 @@
   "homepage": "https://github.com/njedhir/latihan-tcp#readme",
   "dependencies": {
     "json-socket": "^0.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
