@@ -10,7 +10,7 @@ const server = net.createServer(socket => {
   //   console.log(data.toString())
   //   socket.write('Halo client! (dari server')
   // })
-  socket.on('error', err => {
+  sock.on('error', err => {
     console.log('Terjadi error dari client')
     console.log(err.message)
   })
